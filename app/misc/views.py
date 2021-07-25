@@ -30,14 +30,23 @@ def upload_file():
          ### load file into database
          df = pd.read_csv(path)  
          df = df.dropna(how='all')
+         row_count = df.shape[0]
+         if row_count < 5:
+            msg = "minimum 5 rows required."
+            return jsonify(success=False, data=msg)
+         # df.loc[df['comments'].str.len() > 4]
+         # print(df)
+         # if (df.loc[df['comments'].str.len() > 3] :
+         #    msg = "Comments are > 255."
+         #    return jsonify(success=False, data=msg)
          df["f_name"] = filename
          df["runid"] = int(datetime.now(timezone('US/Eastern')).strftime('%Y%m%d%H%M%S'))
          df["inserted_by"] = os.environ['USERNAME']
          df.to_sql("company_info_v2", connection, if_exists='append', index=False)
-      # else:
-      #    msg = "file format not allowed"
-      #    return jsonify(success=True, data=msg)
-      return redirect(url_for('misc_blueprint.upload_file'))
+      else:
+         msg = "file format not allowed"
+         return jsonify(success=False, data=msg)
+      # return redirect(url_for('misc_blueprint.upload_file'))
    return jsonify(success=True, data='file uploaded successfully')
 
 @misc_blueprint.route("/fetch", methods = ['GET'])
