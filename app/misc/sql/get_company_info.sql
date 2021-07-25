@@ -7,5 +7,5 @@ select
 	f_name
 from 
     master.dbo.company_info_v2
-where
-	comments <> "new entry"
+-- where
+-- 	comments <> "new entry"

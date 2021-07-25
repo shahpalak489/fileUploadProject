@@ -2,7 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" href= "{{ url_for('static', filename='styles/style_v2.css') }}" />
-        <title></title>
+        <title>File Upload</title>
     </head>
     <body>
         <p  id="header" class="upload-content"> Welcome to the NYSE/ICE: File upload task</p>
@@ -13,7 +13,6 @@
                     <input type="text" class="text-design upload-text" id="company-name" placeholder="company name" />
                     <button class="btn-design upload-text" id="add_company"> <b>Add Company</b></button>
                 </div>
-                <!-- <button class="btn-design upload-text fetch-btn" id="fetch_companies"> <b>Fetch companies </b></button> -->
             </div>
             <table class="table-style" id="company-list"> </table>
 
@@ -26,18 +25,6 @@
                     <button id="upload-file-btn" type="button">Upload</button>
                 </fieldset>
             </form>
-            <!-- <form method="POST" action="uploader" enctype="multipart/form-data">
-                <p class="file-name upload-text"></p>
-                <p><input type="submit" class="btn-design upload-text submit-btn" value="Add file data"></p>
-                <div class="parent-div">
-                    <label htmlFor="fileUpload" class="upload-button upload-button-container">
-                        <i class="fas fa-file-upload icon-style"></i>
-                        <p class="upload-text">Import File</p>
-                        <input accept=".csv, .txt" class="upload-input" onchange="readfile(this)" id="fileUpload"
-                            type="file" name="file" />
-                    </label>
-                </div>
-            </form> -->
             <div class="upload-text-container">
                 <span class="upload-content">File format: CSV, TXT</span>
                 <span class="upload-content">Min rows: 5</span>
@@ -47,106 +34,6 @@
         </table>
         <script src="https://kit.fontawesome.com/d5a054cd54.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                function readfile(file) {
-                    $(".file-name").html('');
-                    const fileName = file.files[0].name;
-                    $(".file-name").append("File Name: ".concat(fileName));
-                    $(".file-name").css('display', 'block');
-                    $(".submit-btn").css('display', 'block');
-                    //window.location.href="https://www.google.com/"
-                }
-
-                $('#upload-file-btn').click(function() {
-                    var form_data = new FormData($('#upload-file')[0]);
-                    $.ajax({
-                        type: 'POST',
-                        url: '/uploader',
-                        data: form_data,
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        success: function(data, status, xhr) {
-                            $.ajax({
-                                type: 'GET',
-                                url: 'fetch',
-                                contentType: 'application/json',
-                                dataType: 'json',
-                                success: function(data, status, xhr) {
-                                    console.log(data.data)
-                                    let html = "";
-                                    html += "<tr>";
-                                    html += "<th class='table-header upload-content'>" + 'Company Id' + "</th>";
-                                    html += "<th class='table-header upload-content'>" + 'Company Name' + "</th>";
-                                    html += "<th class='table-header upload-content'>" + 'Share price' + "</th>";
-                                    html += "<th class='table-header upload-content'>" + 'share price date' + "</th>";
-                                    html += "<th class='table-header upload-content'>" + 'Comments' + "</th>";
-                                    html += "</tr>";
-                                    $.each(data.data, function (key, value) {
-                                        html += "<tr>";
-                                        html += "<td>" + value.cid + "</td>";
-                                        html += "<td>" + value.cname + "</td>";
-                                        html += "<td>" + value.share_price + "</td>";
-                                        html += "<td>" + value.share_price_dt + "</td>";
-                                        html += "<td>" + value.comments + "</td>";
-                                        html += "</tr>";
-                                    });
-                                    $('#company-detail-data').html(html);
-                                },
-                            });
-                        },
-                    });
-                });
-
-                getCompanyList();
-                function getCompanyList() {
-                    $.ajax({
-                        type: 'GET',
-                        url: 'company/list/v1',
-                        contentType: 'application/json',
-                        dataType: 'json',
-                        success: function(data, status, xhr) {
-                            let html = "";
-                            html += "<tr>";
-                            html += "<th class='table-header upload-content'>" + 'Company Id' + "</th>";
-                            html += "<th class='table-header upload-content'>" + 'Company Name' + "</th>";
-                            html += "</tr>";
-                            $.each(data.data, function (key, value) {
-                                html += "<tr>";
-                                html += "<td>" + value.cid + "</td>";
-                                html += "<td>" + value.cname + "</td>";
-                                html += "</tr>";
-                            });
-                            $('#company-list').html(html);
-                        },
-                        error: function(data, status, xhr) {
-                            console.log('Error in company fetch!');
-                        }
-                    });
-                }
-                
-                $('#add_company').click(function() {
-                    const c_id = $("#company-id" ).val();
-                    const c_name = $("#company-name" ).val();
-                    const data = { c_id, c_name }
-                    $.ajax({
-                        type: 'PUT',
-                        url: '/company/list/v1',
-                        contentType: 'application/json',
-                        dataType: 'json',
-                        data: JSON.stringify({"data": data}),
-                        success: function(data, status, xhr) {
-                            $("#company-id" ).val('');
-                            $("#company-name" ).val('');
-                            getCompanyList();
-                        },
-                        error: function(data, status, xhr) {
-                            console.log('Error in company add!');
-                        }
-                    });
-                });
-            });
-        </script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
     </body>
 </html>
