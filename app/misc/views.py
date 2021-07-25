@@ -13,10 +13,6 @@ from werkzeug.utils import secure_filename
 def cMisc():
    return render_template('home_v2.html')
 
-@misc_blueprint.route("/file_upload")
-def cMisc1():
-   return render_template('file_upload.html')
-
 UPLOAD_FOLDER = os.environ["FILE_UPLOAD_FLDER"]
 ALLOWED_EXTENSIONS = {'txt', 'csv'}
 def allowed_file(filename):

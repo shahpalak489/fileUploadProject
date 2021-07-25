@@ -6,7 +6,6 @@ $(document).ready(function() {
         $(".file-name").css('display', 'block');
         $(".submit-btn").css('display', 'block');
     }
-
     $('#upload-file-btn').click(function() {
         var form_data = new FormData($('#upload-file')[0]);
         $.ajax({
@@ -42,13 +41,12 @@ $(document).ready(function() {
                             html += "</tr>";
                         });
                         $('#company-detail-data').html(html);
-                        window.location.href = 'file_upload';
+                        // window.location.href = 'file_upload';
                     },
                 });
             },
         });
     });
-
     getCompanyList();
     function getCompanyList() {
         $.ajax({
@@ -75,7 +73,6 @@ $(document).ready(function() {
             }
         });
     }
-    
     $('#add_company').click(function() {
         const c_id = $("#company-id" ).val();
         const c_name = $("#company-name" ).val();
