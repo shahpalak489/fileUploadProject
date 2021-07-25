@@ -9,29 +9,13 @@
         <div class="flexbox-prop main-div">
             <div class="flexbox-prop add-company-container">
                 <div>
-                    <input type="text" class="text-design upload-text" placeholder="company id" />
-                    <input type="text" class="text-design upload-text" placeholder="company name" />
-                    <button class="btn-design upload-text"> <b>Add Company</b></button>
+                    <input type="text" class="text-design upload-text" id="company-id" placeholder="company id" />
+                    <input type="text" class="text-design upload-text" id="company-name" placeholder="company name" />
+                    <button class="btn-design upload-text" id="add_company"> <b>Add Company</b></button>
                 </div>
-                <button class="btn-design upload-text fetch-btn"> <b>Fetch company list </b></button>
+                <!-- <button class="btn-design upload-text fetch-btn" id="fetch_companies"> <b>Fetch companies </b></button> -->
             </div>
-
-            <table class="table-style">
-                <tr>
-                    <th class="table-header upload-content">Company Id</th>
-                    <th class="table-header upload-content">Company Name</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Maria Anders</td>
-
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Maria Anders</td>
-
-                </tr>
-            </table>
+            <table class="table-style"> </table>
             <form method="POST" action="uploader" enctype="multipart/form-data">
                 <p class="file-name upload-text"></p>
                 <p><input type="submit" class="btn-design upload-text submit-btn" value="Add file data"></p>
@@ -44,14 +28,10 @@
                     </label>
                 </div>
             </form>
-
             <div class="upload-text-container">
                 <span class="upload-content">File format: CSV, TXT</span>
                 <span class="upload-content">Min rows: 5</span>
             </div>
-
-        </div>
-
         </div>
         <script src="https://kit.fontawesome.com/d5a054cd54.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -66,4 +46,61 @@
             }
         </script>
     </body>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            getCompanyList();
+            function getCompanyList() {
+                $.ajax({
+                    type: 'GET',
+                    url: 'get/existed/company/list/v1',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function(data, status, xhr) {
+                        let html = "";
+                        html += "<tr>";
+                        html += "<th class='table-header upload-content'>" + 'Company Id' + "</th>";
+                        html += "<th class='table-header upload-content'>" + 'Company Name' + "</th>";
+                        html += "</tr>";
+                        $.each(data.data, function (key, value) {
+                            html += "<tr>";
+                            html += "<td>" + value.cid + "</td>";
+                            html += "<td>" + value.cname + "</td>";
+                            html += "</tr>";
+                        });
+                        $('.table-style').html(html);
+
+                    },
+                    error: function(data, status, xhr) {
+                        console.log('Error in company fetch!');
+                    }
+                });
+            }
+            // $('#fetch_companies').click(function() {
+            //     getCompanyList();
+            // });
+            $('#add_company').click(function() {
+                const c_id = $("#company-id" ).val();
+                const c_name = $("#company-name" ).val();
+                const data = {
+                    c_id,
+                    c_name
+                }
+                $.ajax({
+                    type: 'PUT',
+                    url: 'add/new/company/list/v1',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    data: JSON.stringify({"data": data}),
+                    success: function(data, status, xhr) {
+                        console.log(data)
+                        getCompanyList();
+
+                    },
+                    error: function(data, status, xhr) {
+                        console.log('Error in company add!');
+                    }
+                });
+            });
+        });
+    </script>
 </html>
