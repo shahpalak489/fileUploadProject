@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href= "{{ url_for('static', filename='styles/style_v2.css') }}" />
+        <title></title>
+    </head>
+    <body>
+        <p  id="header" class="upload-content"> Welcome to the NYSE/ICE: File upload task</p>
+        <div class="flexbox-prop main-div">
+            <div class="flexbox-prop add-company-container">
+                <div>
+                    <input type="text" class="text-design upload-text" placeholder="company id" />
+                    <input type="text" class="text-design upload-text" placeholder="company name" />
+                    <button class="btn-design upload-text"> <b>Add Company</b></button>
+                </div>
+                <button class="btn-design upload-text fetch-btn"> <b>Fetch company list </b></button>
+            </div>
+
+            <table class="table-style">
+                <tr>
+                    <th class="table-header upload-content">Company Id</th>
+                    <th class="table-header upload-content">Company Name</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Maria Anders</td>
+
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Maria Anders</td>
+
+                </tr>
+            </table>
+            <form method="POST" action="uploader" enctype="multipart/form-data">
+                <p class="file-name upload-text"></p>
+                <p><input type="submit" class="btn-design upload-text submit-btn" value="Add file data"></p>
+                <div class="parent-div">
+                    <label htmlFor="fileUpload" class="upload-button upload-button-container">
+                        <i class="fas fa-file-upload icon-style"></i>
+                        <p class="upload-text">Import File</p>
+                        <input accept=".csv, .txt" class="upload-input" onchange="readfile(this)" id="fileUpload"
+                            type="file" name="file" />
+                    </label>
+                </div>
+            </form>
+
+            <div class="upload-text-container">
+                <span class="upload-content">File format: CSV, TXT</span>
+                <span class="upload-content">Min rows: 5</span>
+            </div>
+
+        </div>
+
+        </div>
+        <script src="https://kit.fontawesome.com/d5a054cd54.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            function readfile(file) {
+                $(".file-name").html('');
+                const fileName = file.files[0].name;
+                $(".file-name").append("File Name: ".concat(fileName));
+                $(".file-name").css('display', 'block');
+                $(".submit-btn").css('display', 'block');
+                //window.location.href="https://www.google.com/"
+            }
+        </script>
+    </body>
+</html>
