@@ -8,6 +8,7 @@ from app import engine, connection
 from flask import Blueprint, Flask, render_template, request, redirect, url_for, jsonify
 misc_blueprint = Blueprint('misc_blueprint', __name__)
 from werkzeug.utils import secure_filename
+from app.misc.company import get_existed_comapny
 
 @misc_blueprint.route("/misc")
 def cMisc():
@@ -31,8 +32,15 @@ def upload_file():
          df = pd.read_csv(path)  
          df = df.dropna(how='all')
 
+         ### check for existing company list
+         df_existed = get_existed_comapny()
+         df_existed['combine'] = df_existed['cid'].astype(str) + df_existed['cname']
+         df['combine'] = (df['cid'].astype(int)).astype(str) + df['cname']
+         check =  all(item in df_existed['combine'].tolist() for item in df['combine'].tolist())
+         if (check == False):
+            return jsonify(success=False, data="oops!! excel has a wrong entry")
+
          ### check for unique rows in df
-         # df2 = df[df.duplicated(['cid', 'cname'])]
          df2 = df[(df.duplicated('cid')) | (df.duplicated('cname'))]
          if df2.empty == False:
             return jsonify(success=False, data="oops!! duplicate entry in excel")
