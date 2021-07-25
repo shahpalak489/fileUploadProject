@@ -36,13 +36,13 @@ $(document).ready(function() {
             cache: false,
             processData: false,
             success: function(data, status, xhr) {
+                toast(data.data, data.success);
                 $.ajax({
                     type: 'GET',
                     url: 'fetch',
                     contentType: 'application/json',
                     dataType: 'json',
                     success: function(data, status, xhr) {
-                        console.log(data.data)
                         let html = "";
                         html += "<tr>";
                         html += "<th class='table-header upload-content'>" + 'Company Id' + "</th>";
@@ -63,6 +63,9 @@ $(document).ready(function() {
                         $('#company-detail-data').html(html);
                         // window.location.href = 'file_upload';
                     },
+                    error: function(data, status, xhr) {
+                        toast(xhr, true);
+                    }
                 });
             },
         });
@@ -90,11 +93,11 @@ $(document).ready(function() {
                 $('#company-list').html(html);
             },
             error: function(data, status, xhr) {
-                console.log('Error in company fetch!');
+                toast(xhr, true);
             }
         });
     }
-    
+
     $('#add_company').click(function() {
         const c_id = $("#company-id" ).val();
         const c_name = $("#company-name" ).val();
@@ -106,15 +109,13 @@ $(document).ready(function() {
             dataType: 'json',
             data: JSON.stringify({"data": data}),
             success: function(data, status, xhr) {
-                console.log(data, "data")
-                console.log("xhr", xhr)
                 $("#company-id" ).val('');
                 $("#company-name" ).val('');
                 getCompanyList();
-                toast(data.data, data.success)
+                toast(data.data, data.success);
             },
             error: function(data, status, xhr) {
-                console.log('Error in company add!');
+                toast(xhr, true);
             }
         });
     });

@@ -31,6 +31,12 @@ def upload_file():
          df = pd.read_csv(path)  
          df = df.dropna(how='all')
 
+         ### check for unique rows in df
+         # df2 = df[df.duplicated(['cid', 'cname'])]
+         df2 = df[(df.duplicated('cid')) | (df.duplicated('cname'))]
+         if df2.empty == False:
+            return jsonify(success=False, data="oops!! duplicate entry in excel")
+
          ### check row count in excel file
          row_count = df.shape[0]
          if row_count < 5:
