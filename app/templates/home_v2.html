@@ -93,8 +93,9 @@
                     data: JSON.stringify({"data": data}),
                     success: function(data, status, xhr) {
                         console.log(data)
+                        $("#company-id" ).val('');
+                        $("#company-name" ).val('');
                         getCompanyList();
-
                     },
                     error: function(data, status, xhr) {
                         console.log('Error in company add!');
