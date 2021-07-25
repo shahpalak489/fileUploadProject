@@ -4,7 +4,7 @@ from datetime import datetime
 from time import time, strftime
 from pytz import timezone
 from app import config
-from app import engine
+from app import engine, connection
 from flask import Blueprint, Flask, render_template, request, redirect, url_for, jsonify
 misc_blueprint = Blueprint('misc_blueprint', __name__)
 from werkzeug.utils import secure_filename
@@ -34,7 +34,7 @@ def upload_file():
          df["runid"] = int(datetime.now(timezone('US/Eastern')).strftime('%Y%m%d%H%M%S'))
          df["inserted_by"] = os.environ['USERNAME']
          print(df)
-         df.to_sql("company_info_v2", engine.connect(), if_exists='append', index=False)
+         df.to_sql("company_info_v2", connection, if_exists='append', index=False)
       else:
          msg = "file format not allowed"
          return jsonify(success=True, data=msg)
@@ -45,5 +45,5 @@ def upload_file():
 def c_fetch():
    file = 'app/misc/sql/get_company_info.sql'
    f = open(file, 'r')
-   df = pd.read_sql_query(f.read(), engine.connect())
+   df = pd.read_sql_query(f.read(), connection)
    return jsonify(success=True, data=df.to_dict(orient='records'))
