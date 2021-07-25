@@ -1,4 +1,23 @@
 $(document).ready(function() {
+    function toast(message, status) {
+        $(".toast").css("display", "flex");
+        $(".toast-text").text(message);
+        if (status){
+            $(".fas").removeClass("fa-times error")
+            $(".fas").addClass("fa-check success")
+            $(".toast").css("border", "1px solid green");
+            $(".toast-text").css("color", "green");
+        } else {
+            $(".fas").removeClass("fa-check success")
+            $(".fas").addClass("fa-times error")
+            $(".toast").css("border", "1px solid red");
+            $(".toast-text").css("color", "red");
+        }
+        setTimeout(function () {
+            $(".toast").css("display", "none");
+        }, 3000);
+    }
+
     function readfile(file) {
         $(".file-name").html('');
         const fileName = file.files[0].name;
@@ -6,6 +25,7 @@ $(document).ready(function() {
         $(".file-name").css('display', 'block');
         $(".submit-btn").css('display', 'block');
     }
+
     $('#upload-file-btn').click(function() {
         var form_data = new FormData($('#upload-file')[0]);
         $.ajax({
@@ -47,6 +67,7 @@ $(document).ready(function() {
             },
         });
     });
+
     getCompanyList();
     function getCompanyList() {
         $.ajax({
@@ -73,6 +94,7 @@ $(document).ready(function() {
             }
         });
     }
+    
     $('#add_company').click(function() {
         const c_id = $("#company-id" ).val();
         const c_name = $("#company-name" ).val();
@@ -84,9 +106,12 @@ $(document).ready(function() {
             dataType: 'json',
             data: JSON.stringify({"data": data}),
             success: function(data, status, xhr) {
+                console.log(data, "data")
+                console.log("xhr", xhr)
                 $("#company-id" ).val('');
                 $("#company-name" ).val('');
                 getCompanyList();
+                toast(data.data, data.success)
             },
             error: function(data, status, xhr) {
                 console.log('Error in company add!');

@@ -1,6 +1,6 @@
 #header {
-    font-size: 30px;
-    width: 100%;
+  font-size: 30px;
+  width: 100%;
 }
 
 .flexbox-prop {
@@ -18,15 +18,15 @@
 }
 
 .add-company-container {
-    border: 1px solid #e3e3e3;
+  border: 1px solid #e3e3e3;
   margin-top: 3%;
   width: 600px;
   height: auto;
 }
 
 .fetch-btn {
-    margin-top: 20px;
-  }
+  margin-top: 20px;
+}
 
 .parent-div {
   margin-top: 3%;
@@ -77,8 +77,6 @@
   display: none;
 }
 
-
-
 .upload-text-container {
   display: flex;
   height: 50px;
@@ -101,6 +99,7 @@
   font-size: 16px;
   background-color: #e3e3e3;
 }
+
 .text-design {
   background-color: white;
 }
@@ -134,4 +133,33 @@
 
 .company-list {
   width: 100%;
+}
+
+.toast {
+  background-color: black;
+  margin-bottom: 10px;
+  height: 50px;
+  width: 250px;
+  align-items: center;
+  color: white;
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  z-index: 2;
+}
+
+.success {
+  font-size: 50px;
+  background-color: green;
+} 
+
+.toast-text {
+  margin-left: 10px;
+  color: green
+}
+
+.error {
+  font-size: 50px;
+  background-color: red;
 }

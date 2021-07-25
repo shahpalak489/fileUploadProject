@@ -27,18 +27,25 @@ def upload_file():
          path = os.path.join(UPLOAD_FOLDER, filename)
          fileitem.save(path)
 
-         ### load file into database
+         ### read csv/txt file
          df = pd.read_csv(path)  
          df = df.dropna(how='all')
+
+         ### check row count in excel file
          row_count = df.shape[0]
          if row_count < 5:
             msg = "minimum 5 rows required."
             return jsonify(success=False, data=msg)
-         # df.loc[df['comments'].str.len() > 4]
-         # print(df)
-         # if (df.loc[df['comments'].str.len() > 3] :
-         #    msg = "Comments are > 255."
-         #    return jsonify(success=False, data=msg)
+
+         ### check comments size in excel
+         mask = (df['comments'].str.len() > 256)
+         df1 = df.loc[mask]
+         if (df1.shape[0] > 0):
+            print("here")
+            msg = "Comments are > 255."
+            return jsonify(success=False, data=msg)
+
+         ### load file into database
          df["f_name"] = filename
          df["runid"] = int(datetime.now(timezone('US/Eastern')).strftime('%Y%m%d%H%M%S'))
          df["inserted_by"] = os.environ['USERNAME']
