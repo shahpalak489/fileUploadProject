@@ -23,6 +23,6 @@ def c_add_combination():
 @com_blueprint.route("/add/new/company/list/v1", methods = ['PUT'])
 def c_unique_combination():
    d = request.get_json()['data']
-   df = pd.DataFrame({'cid': [d['c_id']], 'cname': [d['c_name']]})
+   df = pd.DataFrame({'cid': [d['c_id']], 'cname': [d['c_name']], 'share_price_dt': [''], 'share_price': [0.00], 'comments': ['new entry']})
    df.to_sql("company_info_v2", connection, if_exists='append', index=False)
    return jsonify(success=True, data="successfully company inserted")
