@@ -13,6 +13,10 @@ from werkzeug.utils import secure_filename
 def cMisc():
    return render_template('home_v2.html')
 
+@misc_blueprint.route("/file_upload")
+def cMisc1():
+   return render_template('file_upload.html')
+
 UPLOAD_FOLDER = os.environ["FILE_UPLOAD_FLDER"]
 ALLOWED_EXTENSIONS = {'txt', 'csv'}
 def allowed_file(filename):
@@ -33,11 +37,10 @@ def upload_file():
          df["f_name"] = filename
          df["runid"] = int(datetime.now(timezone('US/Eastern')).strftime('%Y%m%d%H%M%S'))
          df["inserted_by"] = os.environ['USERNAME']
-         print(df)
          df.to_sql("company_info_v2", connection, if_exists='append', index=False)
-      else:
-         msg = "file format not allowed"
-         return jsonify(success=True, data=msg)
+      # else:
+      #    msg = "file format not allowed"
+      #    return jsonify(success=True, data=msg)
       return redirect(url_for('misc_blueprint.upload_file'))
    return jsonify(success=True, data='file uploaded successfully')
 
