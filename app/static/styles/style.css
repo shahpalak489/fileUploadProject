@@ -146,6 +146,10 @@ fieldset {
   z-index: 2;
 }
 
+.symbol-start {
+  margin-left: 10px;
+}
+
 .success {
   font-size: 50px;
   background-color: green;
