@@ -20,14 +20,6 @@ $(document).ready(function() {
         }, 3000);
     }
 
-    // function readfile(file) {
-    //     $(".file-name").html('');
-    //     const fileName = file.files[0].name;
-    //     $(".file-name").append("File Name: ".concat(fileName));
-    //     $(".file-name").css('display', 'block');
-    //     $(".submit-btn").css('display', 'block');
-    // }
-
     $('#upload-file-btn').click(function() {
         var form_data = new FormData($('#upload-file')[0]);
         $.ajax({
