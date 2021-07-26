@@ -60,21 +60,10 @@ fieldset {
   background-color: #e3e3e3;
 }
 
-
-
 .upload-content {
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
   color: cadetblue;
-}
-
-.upload-text-container {
-  display: flex;
-  flex-direction: column;
-  margin-left: 10px;
-  font-size: 12px;
-  align-items: flex-start;
-  padding: 10px;
 }
 
 .add-button {
@@ -89,7 +78,6 @@ fieldset {
 .company-table {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  margin-top: 20px;
   text-align: center;
   width: 100%;
 }
@@ -114,7 +102,6 @@ fieldset {
 
 .company-table {
   visibility: visible;
-  /* margin-top: 10px; */
   height: auto;
   width: 45%;
   max-height: 230px;

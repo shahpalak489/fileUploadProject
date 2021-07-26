@@ -8,13 +8,13 @@
     <body>
         <div class="main-div background-color">
             <p id="header" class="upload-content">
-                Welcome to the NYSE/ICE: File upload task
+                Welcome to the NYSE/ICE: Data Upload Application
             </p>
         </div>
         <div class="container-div">
             <div class="flexbox-prop main-div">
                 <p class="text-style div-heading">
-                    <b><u> Company Info: </u></b>
+                    <b><u> Add Company: </u></b>
                 </p>
                 <div class="flexbox-prop add-company-container">
                     <div class="toast">
@@ -28,6 +28,10 @@
                             <b>Add</b>
                         </button>
                     </div>
+
+                    <p class="text-style div-heading">
+                        <b><u> Company Info: </u></b>
+                    </p>
                 </div>
                 <div class="company-table">
                     <table class="table-style" id="company-list"> </table>
@@ -35,25 +39,21 @@
             </div>
             <div class="flexbox-prop main-div">
                 <p class="text-style div-heading">
-                    <b><u> Upload your file here: </u></b>
+                    <b><u> Upload File:</u></b>
                 </p>
                 <form id="upload-file" method="post" enctype="multipart/form-data">
                     <fieldset>
                         <label for="file"></label>
-                        <input name="file" type="file" id="file-upload" class="text-style"/>
+                        <input accept=".csv, .txt" name="file" type="file" id="file-upload" class="text-style"/>
                     </fieldset>
                     <fieldset>
                         <button id="upload-file-btn" class="inputbox-design background-color text-style" type="button" > Submit </button>
                     </fieldset>
                 </form>
-                <div class="upload-text-container format-style background-color">
-                    <span class="upload-content">Format: CSV, TXT</span>
-                    <span class="upload-content">Min rows: 5</span>
-                </div>
             </div>
             <div class="flexbox-prop main-div" id="detail-data-block" >
                 <p class="text-style div-heading">
-                    <b><u> Share price detail: </u></b>
+                    <b><u> Share Price Detail: </u></b>
                 </p>
                 <div class="detail-data">
                     <table class="table-style" id="company-detail-data"> </table>
