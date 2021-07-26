@@ -55,7 +55,15 @@ def c_file_uploader():
          row_count = df.shape[0]
          if row_count < 5:
             msg = "minimum 5 rows required in excel."
-            logging.info("check 5: {}".format(msg))
+            logging.info("check 3: {}".format(msg))
+            return jsonify(success=False, data=msg)
+
+         ### check cols in upload file
+         required_cols = ['cid', 'cname', 'share_price_dt', 'share_price', 'comments']
+         available_cols = list(df)
+         if required_cols != available_cols:
+            msg = "missing or extra columns in excel."
+            logging.info("check 4: {}".format(msg))
             return jsonify(success=False, data=msg)
 
          ### check for existing company list
@@ -65,7 +73,7 @@ def c_file_uploader():
          check =  all(item in df_existed['combine'].tolist() for item in df['combine'].tolist())
          if (check == False):
             msg = "company not available in database."
-            logging.info("check 3: {}".format(msg))
+            logging.info("check 5: {}".format(msg))
             return jsonify(success=False, data=msg)
          df.drop(columns=['combine'], inplace=True)
             
@@ -73,7 +81,7 @@ def c_file_uploader():
          df_duplicated = df[(df.duplicated('cid')) | (df.duplicated('cname'))]
          if df_duplicated.empty == False:
             msg = "duplicate entry in excel."
-            logging.info("check 4: {}".format(msg))
+            logging.info("check 6: {}".format(msg))
             return jsonify(success=False, data=msg)
 
          ### check comments size in excel
@@ -81,7 +89,7 @@ def c_file_uploader():
          df_size = df.loc[mask]
          if (df_size.shape[0] > 0):
             msg = "comments should be less than 256 chars."
-            logging.info("check 6: {}".format(msg))
+            logging.info("check 7: {}".format(msg))
             return jsonify(success=False, data=msg)
          
          ### check share price limitation
@@ -91,7 +99,7 @@ def c_file_uploader():
          df_merged['check_share_price'] = df_merged['share_price_x'] * 10
          if (df_merged['check_share_price'] <= df_merged['share_price_y']).any():
             msg = "share price is 10 times more than prev entry."
-            logging.info("check 7: {}".format(msg))
+            logging.info("check 8: {}".format(msg))
             return jsonify(success=False, data=msg)
 
          ### load file into database
