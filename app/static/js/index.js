@@ -30,6 +30,10 @@ $(document).ready(function() {
         }, 3000);
     }
 
+    $("#file-upload").click(function(e){
+        e.target.value = null
+    });
+
     $('#upload-file-btn').click(function() {
         var form_data = new FormData($('#upload-file')[0]);
         $.ajax({

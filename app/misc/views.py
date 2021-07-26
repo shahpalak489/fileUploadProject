@@ -51,6 +51,13 @@ def c_file_uploader():
          df = pd.read_csv(path)  
          df = df.dropna(how='all')
 
+         ### check row count in excel file
+         row_count = df.shape[0]
+         if row_count < 5:
+            msg = "minimum 5 rows required in excel."
+            logging.info("check 5: {}".format(msg))
+            return jsonify(success=False, data=msg)
+
          ### check for existing company list
          df_existed = get_existed_comapny()
          df_existed['combine'] = df_existed['cid'].astype(str) + df_existed['cname']
@@ -67,13 +74,6 @@ def c_file_uploader():
          if df_duplicated.empty == False:
             msg = "duplicate entry in excel."
             logging.info("check 4: {}".format(msg))
-            return jsonify(success=False, data=msg)
-
-         ### check row count in excel file
-         row_count = df.shape[0]
-         if row_count < 5:
-            msg = "minimum 5 rows required in excel."
-            logging.info("check 5: {}".format(msg))
             return jsonify(success=False, data=msg)
 
          ### check comments size in excel
