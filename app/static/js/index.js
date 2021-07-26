@@ -63,7 +63,6 @@ $(document).ready(function() {
                             html += "</tr>";
                         });
                         $('#company-detail-data').html(html);
-                        // window.location.href = 'file_upload';
                     },
                     error: function(data, status, xhr) {
                         toast(xhr, true);
