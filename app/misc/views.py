@@ -39,7 +39,8 @@ def upload_file():
          check =  all(item in df_existed['combine'].tolist() for item in df['combine'].tolist())
          if (check == False):
             return jsonify(success=False, data="oops!! excel has a wrong entry")
-
+         
+         df.drop(columns=['combine'], inplace=True)
          ### check for unique rows in df
          df2 = df[(df.duplicated('cid')) | (df.duplicated('cname'))]
          if df2.empty == False:
@@ -56,7 +57,7 @@ def upload_file():
          df1 = df.loc[mask]
          if (df1.shape[0] > 0):
             print("here")
-            msg = "Comments are > 255."
+            msg = "Comments are > 256."
             return jsonify(success=False, data=msg)
 
          ### load file into database
