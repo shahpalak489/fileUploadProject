@@ -45,9 +45,9 @@ $(document).ready(function() {
             cache: false,
             processData: false,
             success: function(data, status, xhr) {
-                $("#detail-data-block").css("display","flex")
                 toast(data.data, data.success);
                 if (data.success == true) {
+                    $("#detail-data-block").css("display","flex");
                     $.ajax({
                         type: 'GET',
                         url: 'fetch/uploaded/companies/v1',
@@ -77,6 +77,8 @@ $(document).ready(function() {
                             toast(xhr, true);
                         }
                     });
+                } else {
+                    $("#detail-data-block").css("display","none")
                 }
             },
         });
