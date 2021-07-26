@@ -12,7 +12,7 @@ from app.misc.company import get_existed_comapny
 
 @misc_blueprint.route("/misc")
 def cMisc():
-   return render_template('home_v2.html')
+   return render_template('home.html')
 
 UPLOAD_FOLDER = os.environ["FILE_UPLOAD_FLDER"]
 ALLOWED_EXTENSIONS = {'txt', 'csv'}
