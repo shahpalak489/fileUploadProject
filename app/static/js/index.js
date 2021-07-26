@@ -19,13 +19,11 @@ $(document).ready(function() {
         if (status){
             $(".fas").removeClass("fa-times error")
             $(".fas").addClass("fa-check success")
-            $(".toast").css("border", "1px solid green");
-            $(".toast-text").css("color", "green");
+            $(".toast").css("background-color", "green");
         } else {
             $(".fas").removeClass("fa-check success")
             $(".fas").addClass("fa-times error")
-            $(".toast").css("border", "1px solid red");
-            $(".toast-text").css("color", "red");
+            $(".toast").css( "background-color", "red");
         }
         setTimeout(function () {
             $(".toast").css("display", "none");
