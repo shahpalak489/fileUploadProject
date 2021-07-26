@@ -99,6 +99,7 @@ def c_file_uploader():
          df["f_name"] = filename
          df["runid"] = int(datetime.now(timezone('US/Eastern')).strftime('%Y%m%d%H%M%S'))
          df["inserted_by"] = os.environ['USERNAME']
+         df['share_price_dt']= pd.to_datetime(df['share_price_dt'], errors='coerce')
          df.to_sql("company_info", connection, if_exists='append', index=False)
          msg = "successfully {} rows uploaded.".format(df.shape[0])
          logging.info("success: {}".format(msg))

@@ -30,6 +30,7 @@ $(document).ready(function() {
         }, 3000);
     }
 
+    // To make the target value null on every upload 
     $("#file-upload").click(function(e){
         e.target.value = null
     });
@@ -46,35 +47,37 @@ $(document).ready(function() {
             success: function(data, status, xhr) {
                 $("#detail-data-block").css("display","flex")
                 toast(data.data, data.success);
-                $.ajax({
-                    type: 'GET',
-                    url: 'fetch/uploaded/companies/v1',
-                    contentType: 'application/json',
-                    dataType: 'json',
-                    success: function(data, status, xhr) {
-                        let html = "";
-                        html += "<tr>";
-                        html += "<th class='table-header upload-content'>" + 'Company Id' + "</th>";
-                        html += "<th class='table-header upload-content'>" + 'Company Name' + "</th>";
-                        html += "<th class='table-header upload-content'>" + 'Share price' + "</th>";
-                        html += "<th class='table-header upload-content'>" + 'share price date' + "</th>";
-                        html += "<th class='table-header upload-content'>" + 'Comments' + "</th>";
-                        html += "</tr>";
-                        $.each(data.data, function (key, value) {
+                if (data.success == true) {
+                    $.ajax({
+                        type: 'GET',
+                        url: 'fetch/uploaded/companies/v1',
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        success: function(data, status, xhr) {
+                            let html = "";
                             html += "<tr>";
-                            html += "<td>" + value.cid + "</td>";
-                            html += "<td>" + value.cname + "</td>";
-                            html += "<td>" + '$' + value.share_price + "</td>";
-                            html += "<td>" + formatDate(value.share_price_dt) + "</td>";
-                            html += "<td>" + value.comments + "</td>";
+                            html += "<th class='table-header upload-content'>" + 'Company Id' + "</th>";
+                            html += "<th class='table-header upload-content'>" + 'Company Name' + "</th>";
+                            html += "<th class='table-header upload-content'>" + 'Share price' + "</th>";
+                            html += "<th class='table-header upload-content'>" + 'share price date' + "</th>";
+                            html += "<th class='table-header upload-content'>" + 'Comments' + "</th>";
                             html += "</tr>";
-                        });
-                        $('#company-detail-data').html(html);
-                    },
-                    error: function(data, status, xhr) {
-                        toast(xhr, true);
-                    }
-                });
+                            $.each(data.data, function (key, value) {
+                                html += "<tr>";
+                                html += "<td>" + value.cid + "</td>";
+                                html += "<td>" + value.cname + "</td>";
+                                html += "<td>" + '$' + value.share_price + "</td>";
+                                html += "<td>" + formatDate(value.share_price_dt) + "</td>";
+                                html += "<td>" + value.comments + "</td>";
+                                html += "</tr>";
+                            });
+                            $('#company-detail-data').html(html);
+                        },
+                        error: function(data, status, xhr) {
+                            toast(xhr, true);
+                        }
+                    });
+                }
             },
         });
     });
