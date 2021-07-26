@@ -38,7 +38,7 @@ def c_file_uploader():
             return jsonify(success=False, data=msg)
 
          if not allowed_file(fileitem.filename):
-            msg = "please check format is not valid."
+            msg = "file format is not valid."
             logging.info("check 2: {}".format(msg))
             return jsonify(success=False, data=msg)
 
@@ -57,7 +57,7 @@ def c_file_uploader():
          df['combine'] = (df['cid'].astype(int)).astype(str) + df['cname']
          check =  all(item in df_existed['combine'].tolist() for item in df['combine'].tolist())
          if (check == False):
-            msg = "please check company NA in database."
+            msg = "company not available in database."
             logging.info("check 3: {}".format(msg))
             return jsonify(success=False, data=msg)
          df.drop(columns=['combine'], inplace=True)
@@ -65,14 +65,14 @@ def c_file_uploader():
          ### check for unique rows in df
          df_duplicated = df[(df.duplicated('cid')) | (df.duplicated('cname'))]
          if df_duplicated.empty == False:
-            msg = "please check duplicate entry in excel."
+            msg = "duplicate entry in excel."
             logging.info("check 4: {}".format(msg))
             return jsonify(success=False, data=msg)
 
          ### check row count in excel file
          row_count = df.shape[0]
          if row_count < 5:
-            msg = "please check minimum 5 rows required in excel."
+            msg = "minimum 5 rows required in excel."
             logging.info("check 5: {}".format(msg))
             return jsonify(success=False, data=msg)
 
@@ -80,7 +80,7 @@ def c_file_uploader():
          mask = (df['comments'].str.len() > 256)
          df_size = df.loc[mask]
          if (df_size.shape[0] > 0):
-            msg = "please check comments > 256."
+            msg = "comments should be less than 256 chars."
             logging.info("check 6: {}".format(msg))
             return jsonify(success=False, data=msg)
          
@@ -90,7 +90,7 @@ def c_file_uploader():
          df_merged = pd.merge(df_detail, df, how='left', on=['cid','cname'])
          df_merged['check_share_price'] = df_merged['share_price_x'] * 10
          if (df_merged['check_share_price'] <= df_merged['share_price_y']).any():
-            msg = "please check share price."
+            msg = "share price is 10 times more than prev entry."
             logging.info("check 7: {}".format(msg))
             return jsonify(success=False, data=msg)
 
@@ -99,7 +99,7 @@ def c_file_uploader():
          df["f_name"] = filename
          df["runid"] = int(datetime.now(timezone('US/Eastern')).strftime('%Y%m%d%H%M%S'))
          df["inserted_by"] = os.environ['USERNAME']
-         df.to_sql("company_info_v2", connection, if_exists='append', index=False)
+         df.to_sql("company_info", connection, if_exists='append', index=False)
          msg = "successfully {} rows uploaded.".format(df.shape[0])
          logging.info("success: {}".format(msg))
       except Exception as e:

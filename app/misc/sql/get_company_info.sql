@@ -2,7 +2,7 @@ with cte_max_runid as (
 	select
 		max(runid) runid
 	from
-		master.dbo.company_info_v2
+		master.dbo.company_info
 )
 select 
     v.cid,
@@ -12,7 +12,7 @@ select
 	v.comments,
 	v.f_name
 from 
-    master.dbo.company_info_v2 v
+    master.dbo.company_info v
 join
 	cte_max_runid c on
 		c.runid = v.runid

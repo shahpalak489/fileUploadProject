@@ -48,7 +48,7 @@ def c_add_combination():
          ### add new company to database
          df = pd.DataFrame({'cid': [res['c_id']], 'cname': [res['c_name']], 'share_price_dt': [''], 
                            'share_price': [0.00], 'comments': ['new entry']})
-         df.to_sql("company_info_v2", connection, if_exists='append', index=False)
+         df.to_sql("company_info", connection, if_exists='append', index=False)
          msg = "yay!! successfully new company inserted."
          logging.info("success: {}".format(msg))
       except Exception as e:
