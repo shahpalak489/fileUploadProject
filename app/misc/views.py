@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import numpy as np
 from datetime import datetime
 from time import time, strftime
 from pytz import timezone
@@ -16,6 +17,12 @@ UPLOAD_FOLDER = os.environ["FILE_UPLOAD_FLDER"]
 ALLOWED_EXTENSIONS = {'txt', 'csv'}
 def allowed_file(filename):
    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def get_company_detail():
+   file = 'app/misc/sql/get_company_info.sql'
+   f = open(file, 'r')
+   df = pd.read_sql_query(f.read(), connection)
+   return df
 
 @misc_blueprint.route('/file/uploader', methods = ['GET', 'POST'])
 def c_file_uploader():
@@ -46,8 +53,8 @@ def c_file_uploader():
          df.drop(columns=['combine'], inplace=True)
          
          ### check for unique rows in df
-         df2 = df[(df.duplicated('cid')) | (df.duplicated('cname'))]
-         if df2.empty == False:
+         df_duplicated = df[(df.duplicated('cid')) | (df.duplicated('cname'))]
+         if df_duplicated.empty == False:
             msg = "oops!! duplicate entry in excel."
             logging.info("check 2: {}".format(msg))
             return jsonify(success=False, data=msg)
@@ -61,14 +68,24 @@ def c_file_uploader():
 
          ### check comments size in excel
          mask = (df['comments'].str.len() > 256)
-         df1 = df.loc[mask]
-         if (df1.shape[0] > 0):
+         df_size = df.loc[mask]
+         if (df_size.shape[0] > 0):
             msg = "oops!! comments > 256."
             logging.info("check 4: {}".format(msg))
             return jsonify(success=False, data=msg)
+         
+         ### check share price limitation
+         df_detail = get_company_detail()
+         df_detail.drop(columns=['share_price_dt', 'comments', 'f_name'], inplace=True)
+         df_merged = pd.merge(df_detail, df, how='left', on=['cid','cname'])
+         df_merged['check_share_price'] = df_merged['share_price_x'] * 10
+         if (df_merged['check_share_price'] <= df_merged['share_price_y']).any():
+            msg = "oops!! please check share price."
+            logging.info("check 5: {}".format(msg))
+            return jsonify(success=False, data=msg)
 
          ### load file into database
-         logging.info("all check passed, ready to insert into databse")
+         logging.info("Yay!! all checks passed, ready to insert into databse")
          df["f_name"] = filename
          df["runid"] = int(datetime.now(timezone('US/Eastern')).strftime('%Y%m%d%H%M%S'))
          df["inserted_by"] = os.environ['USERNAME']
@@ -86,7 +103,5 @@ def c_file_uploader():
 def c_fetch_uploaded_companies():
    logging.info("-")
    logging.info(request.path + "...[" + request.method + "]")
-   file = 'app/misc/sql/get_company_info.sql'
-   f = open(file, 'r')
-   df = pd.read_sql_query(f.read(), connection)
+   df = get_company_detail()
    return jsonify(success=True, data=df.to_dict(orient='records'))
