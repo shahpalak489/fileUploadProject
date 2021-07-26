@@ -2,7 +2,9 @@ import os
 from flask import Flask, render_template
 from app.misc.views import misc_blueprint
 from app.misc.company import com_blueprint
-from app import config
+from app import config 
+import logging
+logging.getLogger().setLevel(logging.DEBUG)
 
 TEMPLATE_DIR = os.path.abspath(os.environ["TEMPLATE"])
 STATIC_DIR = os.path.abspath(os.environ["STATIC"])
@@ -13,6 +15,7 @@ app.register_blueprint(com_blueprint)
 
 @app.route("/")
 def welcome():
+    logging.info("Welcome to File Upload Project.")
     return render_template('home.html')
 
 if __name__ == "__main__":

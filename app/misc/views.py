@@ -9,6 +9,8 @@ from flask import Blueprint, Flask, request, redirect, url_for, jsonify
 misc_blueprint = Blueprint('misc_blueprint', __name__)
 from werkzeug.utils import secure_filename
 from app.misc.company import get_existed_comapny
+import logging
+logging.getLogger().setLevel(logging.DEBUG)
 
 UPLOAD_FOLDER = os.environ["FILE_UPLOAD_FLDER"]
 ALLOWED_EXTENSIONS = {'txt', 'csv'}
@@ -18,11 +20,15 @@ def allowed_file(filename):
 @misc_blueprint.route('/file/uploader', methods = ['GET', 'POST'])
 def c_file_uploader():
    if request.method == 'POST':
+      logging.info("-")
+      logging.info(request.path + "...[" + request.method + "]")
+
       fileitem = request.files['file']
       if fileitem and allowed_file(fileitem.filename):
          filename = secure_filename(fileitem.filename)
          path = os.path.join(UPLOAD_FOLDER, filename)
          fileitem.save(path)
+         logging.info("Uploaded File location: {}".format(path))
 
          ### read csv/txt file
          df = pd.read_csv(path)  
@@ -34,41 +40,52 @@ def c_file_uploader():
          df['combine'] = (df['cid'].astype(int)).astype(str) + df['cname']
          check =  all(item in df_existed['combine'].tolist() for item in df['combine'].tolist())
          if (check == False):
-            return jsonify(success=False, data="oops!! company NA in database.")
-         
+            msg = "oops!! company NA in database."
+            logging.info("check 1: {}".format(msg))
+            return jsonify(success=False, data=msg)
          df.drop(columns=['combine'], inplace=True)
+         
          ### check for unique rows in df
          df2 = df[(df.duplicated('cid')) | (df.duplicated('cname'))]
          if df2.empty == False:
-            return jsonify(success=False, data="oops!! duplicate entry in excel")
+            msg = "oops!! duplicate entry in excel."
+            logging.info("check 2: {}".format(msg))
+            return jsonify(success=False, data=msg)
 
          ### check row count in excel file
          row_count = df.shape[0]
          if row_count < 5:
-            msg = "oops!! minimum 5 rows required."
+            msg = "oops!! minimum 5 rows required in excel."
+            logging.info("check 3: {}".format(msg))
             return jsonify(success=False, data=msg)
 
          ### check comments size in excel
          mask = (df['comments'].str.len() > 256)
          df1 = df.loc[mask]
          if (df1.shape[0] > 0):
-            print("here")
             msg = "oops!! comments > 256."
+            logging.info("check 4: {}".format(msg))
             return jsonify(success=False, data=msg)
 
          ### load file into database
+         logging.info("all check passed, ready to insert into databse")
          df["f_name"] = filename
          df["runid"] = int(datetime.now(timezone('US/Eastern')).strftime('%Y%m%d%H%M%S'))
          df["inserted_by"] = os.environ['USERNAME']
          df.to_sql("company_info_v2", connection, if_exists='append', index=False)
+         msg = "successfully {} rows uploaded.".format(df.shape[0])
+         logging.info("success: {}".format(msg))
       else:
          msg = "file format not allowed"
+         logging.info("check 5: {}".format(msg))
          return jsonify(success=False, data=msg)
       # return redirect(url_for('misc_blueprint.upload_file'))
-   return jsonify(success=True, data='file uploaded successfully')
+   return jsonify(success=True, data=msg)
 
 @misc_blueprint.route("/fetch/uploaded/companies/v1", methods = ['GET'])
 def c_fetch_uploaded_companies():
+   logging.info("-")
+   logging.info(request.path + "...[" + request.method + "]")
    file = 'app/misc/sql/get_company_info.sql'
    f = open(file, 'r')
    df = pd.read_sql_query(f.read(), connection)
