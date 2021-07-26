@@ -1,6 +1,18 @@
 $(document).ready(function() {
     getCompanyList();
 
+    function formatDate(date) {
+        var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+        return [year, month, day].join('-');
+    }
+
     function toast(message, status) {
         $(".toast").css("display", "flex");
         $(".toast-text").text(message);
@@ -51,7 +63,7 @@ $(document).ready(function() {
                             html += "<td>" + value.cid + "</td>";
                             html += "<td>" + value.cname + "</td>";
                             html += "<td>" + '$' + value.share_price + "</td>";
-                            html += "<td>" + value.share_price_dt + "</td>";
+                            html += "<td>" + formatDate(value.share_price_dt) + "</td>";
                             html += "<td>" + value.comments + "</td>";
                             html += "</tr>";
                         });

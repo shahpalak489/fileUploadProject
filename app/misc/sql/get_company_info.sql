@@ -1,11 +1,23 @@
+with cte_max_runid as (
+	select
+		max(runid) runid
+	from
+		master.dbo.company_info_v2
+)
 select 
-    cid,
-	cname,
-	convert(datetime, share_price_dt, 23) share_price_dt,
-	convert(numeric(19, 2), share_price) share_price,
-	comments,
-	f_name
+    v.cid,
+	v.cname,
+	convert(datetime, v.share_price_dt, 23) share_price_dt,
+	convert(numeric(19, 2), v.share_price) share_price,
+	v.comments,
+	v.f_name
 from 
-    master.dbo.company_info_v2
+    master.dbo.company_info_v2 v
+join
+	cte_max_runid c on
+		c.runid = v.runid
 where 
-	f_name is not null
+	v.f_name is not null
+order by
+	v.share_price,
+	v.cid
