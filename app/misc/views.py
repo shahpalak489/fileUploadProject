@@ -5,22 +5,18 @@ from time import time, strftime
 from pytz import timezone
 from app import config
 from app import engine, connection
-from flask import Blueprint, Flask, render_template, request, redirect, url_for, jsonify
+from flask import Blueprint, Flask, request, redirect, url_for, jsonify
 misc_blueprint = Blueprint('misc_blueprint', __name__)
 from werkzeug.utils import secure_filename
 from app.misc.company import get_existed_comapny
-
-@misc_blueprint.route("/misc")
-def cMisc():
-   return render_template('home.html')
 
 UPLOAD_FOLDER = os.environ["FILE_UPLOAD_FLDER"]
 ALLOWED_EXTENSIONS = {'txt', 'csv'}
 def allowed_file(filename):
    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@misc_blueprint.route('/uploader', methods = ['GET', 'POST'])
-def upload_file():
+@misc_blueprint.route('/file/uploader', methods = ['GET', 'POST'])
+def c_file_uploader():
    if request.method == 'POST':
       fileitem = request.files['file']
       if fileitem and allowed_file(fileitem.filename):
@@ -38,7 +34,7 @@ def upload_file():
          df['combine'] = (df['cid'].astype(int)).astype(str) + df['cname']
          check =  all(item in df_existed['combine'].tolist() for item in df['combine'].tolist())
          if (check == False):
-            return jsonify(success=False, data="oops!! excel has a wrong entry")
+            return jsonify(success=False, data="oops!! company NA in database.")
          
          df.drop(columns=['combine'], inplace=True)
          ### check for unique rows in df
@@ -49,7 +45,7 @@ def upload_file():
          ### check row count in excel file
          row_count = df.shape[0]
          if row_count < 5:
-            msg = "minimum 5 rows required."
+            msg = "oops!! minimum 5 rows required."
             return jsonify(success=False, data=msg)
 
          ### check comments size in excel
@@ -57,7 +53,7 @@ def upload_file():
          df1 = df.loc[mask]
          if (df1.shape[0] > 0):
             print("here")
-            msg = "Comments are > 256."
+            msg = "oops!! comments > 256."
             return jsonify(success=False, data=msg)
 
          ### load file into database
@@ -71,8 +67,8 @@ def upload_file():
       # return redirect(url_for('misc_blueprint.upload_file'))
    return jsonify(success=True, data='file uploaded successfully')
 
-@misc_blueprint.route("/fetch", methods = ['GET'])
-def c_fetch():
+@misc_blueprint.route("/fetch/uploaded/companies/v1", methods = ['GET'])
+def c_fetch_uploaded_companies():
    file = 'app/misc/sql/get_company_info.sql'
    f = open(file, 'r')
    df = pd.read_sql_query(f.read(), connection)

@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    getCompanyList();
+
     function toast(message, status) {
         $(".toast").css("display", "flex");
         $(".toast-text").text(message);
@@ -18,19 +20,19 @@ $(document).ready(function() {
         }, 3000);
     }
 
-    function readfile(file) {
-        $(".file-name").html('');
-        const fileName = file.files[0].name;
-        $(".file-name").append("File Name: ".concat(fileName));
-        $(".file-name").css('display', 'block');
-        $(".submit-btn").css('display', 'block');
-    }
+    // function readfile(file) {
+    //     $(".file-name").html('');
+    //     const fileName = file.files[0].name;
+    //     $(".file-name").append("File Name: ".concat(fileName));
+    //     $(".file-name").css('display', 'block');
+    //     $(".submit-btn").css('display', 'block');
+    // }
 
     $('#upload-file-btn').click(function() {
         var form_data = new FormData($('#upload-file')[0]);
         $.ajax({
             type: 'POST',
-            url: '/uploader',
+            url: '/file/uploader',
             data: form_data,
             contentType: false,
             cache: false,
@@ -39,7 +41,7 @@ $(document).ready(function() {
                 toast(data.data, data.success);
                 $.ajax({
                     type: 'GET',
-                    url: 'fetch',
+                    url: 'fetch/uploaded/companies/v1',
                     contentType: 'application/json',
                     dataType: 'json',
                     success: function(data, status, xhr) {
@@ -71,7 +73,6 @@ $(document).ready(function() {
         });
     });
 
-    getCompanyList();
     function getCompanyList() {
         $.ajax({
             type: 'GET',

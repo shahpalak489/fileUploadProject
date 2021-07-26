@@ -5,7 +5,7 @@ from time import time, strftime
 from pytz import timezone
 from app import config
 from app import engine, connection
-from flask import Blueprint, Flask, render_template, request, redirect, url_for, jsonify
+from flask import Blueprint, Flask, request, redirect, url_for, jsonify
 com_blueprint = Blueprint('com_blueprint', __name__)
 
 def get_existed_comapny():
@@ -22,10 +22,13 @@ def c_add_combination():
 
    if request.method == 'PUT':
       res = request.get_json()['data']
+      ### check if company id, name is already existed
       df_existed = get_existed_comapny()
       df1 = df_existed[(df_existed['cid'] == int(res['c_id'])) | (df_existed['cname'] == res['c_name'])]
       if df1.empty == False:
          return jsonify(success=False, data="oops!! company list already existed")
+      
+      ### add new company to database
       df = pd.DataFrame({'cid': [res['c_id']], 'cname': [res['c_name']], 'share_price_dt': [''], 'share_price': [0.00], 'comments': ['new entry']})
       df.to_sql("company_info_v2", connection, if_exists='append', index=False)
       return jsonify(success=True, data="successfully new company inserted")

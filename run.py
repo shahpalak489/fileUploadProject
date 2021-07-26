@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, render_template
 from app.misc.views import misc_blueprint
 from app.misc.company import com_blueprint
 from app import config
@@ -13,7 +13,7 @@ app.register_blueprint(com_blueprint)
 
 @app.route("/")
 def welcome():
-    return "Welcome to File upload!"
+    return render_template('home.html')
 
 if __name__ == "__main__":
     app.run(debug=True, port=5005)
