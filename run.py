@@ -6,6 +6,7 @@ from app import config
 
 TEMPLATE_DIR = os.path.abspath(os.environ["TEMPLATE"])
 STATIC_DIR = os.path.abspath(os.environ["STATIC"])
+
 app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 app.register_blueprint(misc_blueprint)
 app.register_blueprint(com_blueprint)
