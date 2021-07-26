@@ -1,145 +1,163 @@
 #header {
-    font-size: 30px;
-    width: 100%;
-  }
+  font-size: 30px;
+  width: 100%;
+}
+
+fieldset {
+  border: none;
+  margin: 0;
+}
+
+.format-style {
+  width: 13%;
+  height: 20px;
+}
+
+.upload-footer {
+  display: flex;
+}
+
+.flexbox-prop {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.text-style {
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: cadetblue;
+}
+
+.div-heading {
+  font-size: 20px;
+}
+
+.container-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-div {
+  margin: auto;
+  width: 60%;
+  border: 1px solid #e3e3e3;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.add-company-container {
+  width: 70%;
+  height: auto;
+}
+
+.inputbox-design {
+  height: 25px;
+  width: 120px;
+}
+
+.background-color {
+  background-color: #e3e3e3;
+}
+
+
+
+.upload-content {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  color: cadetblue;
+}
+
+.upload-text-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  font-size: 12px;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.add-button {
+  height: 30px;
+  width: 100px;
+  border-radius: 3px;
+  border: 1px solid black;
+}
+
+/* table stlyings */
+.table-style,
+.company-table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.table-style td,
+.table-style th {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+.table-style tr:nth-child(even) {
+  /* background-color: #f2f2f2; */
+}
+
+.table-style tr:hover {
+  background-color: #f7fafa;
+}
+
+.table-header {
+  background-color: #e3e3e3;
+}
+
+.company-table {
+  visibility: visible;
+  /* margin-top: 10px; */
+  height: auto;
+  width: 45%;
+  max-height: 230px;
+  overflow: auto;
+}
+
+.detail-data {
+  height: auto;
+  width: 91%;
+  max-height: 430px;
+  overflow: auto;
+}
+
+#detail-data-block {
+  display: none;
+}
+
+/* toast message stylings */
+.toast {
+  background-color: black;
+  margin-bottom: 10px;
+  height: 50px;
+  width: 250px;
+  align-items: center;
+  color: white;
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  z-index: 2;
+}
+
+.success {
+  font-size: 50px;
+  background-color: green;
+}
+
+.toast-text {
+  margin-left: 10px;
+  color: green;
+}
+
+.error {
+  font-size: 50px;
+  background-color: red;
+}
   
-  fieldset {
-    border: none;
-    margin: 0;
-  }
-  
-  .set-width {
-    width: 45%;
-  }
-  
-  .upload-footer {
-    display: flex;
-  }
-  
-  .flexbox-prop {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-  }
-  
-  .text-style {
-    font-size: 14px;
-    font-family: Arial, Helvetica, sans-serif;
-    color: cadetblue;
-  }
-  
-  .div-heading {
-    font-size: 20px;
-  }
-  
-  .container-div {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .main-div {
-    margin: auto;
-    width: 60%;
-    border: 1px solid #e3e3e3;
-    padding: 10px;
-    margin-top: 20px;
-  }
-  
-  .add-company-container {
-    width: 70%;
-    height: auto;
-  }
-  
-  .inputbox-design {
-    height: 25px;
-    width: 120px;
-  }
-  
-  .background-color {
-    background-color: #e3e3e3;
-  }
-  
-  .upload-text-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #e3e3e3;
-  }
-  
-  .upload-content {
-    text-align: center;
-    font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
-    color: cadetblue;
-  }
-  
-  /* table stlyings */
-  .table-style,
-  .company-table {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    margin-top: 20px;
-    text-align: center;
-  }
-  
-  .table-style td,
-  .table-style th {
-    border: 1px solid #e3e3e3;
-    padding: 8px;
-  }
-  
-  .table-style tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  .table-style tr:hover {
-    background-color: #f7fafa;
-  }
-  
-  .table-header {
-    background-color: #e3e3e3;
-  }
-  
-  .company-table {
-    visibility: visible;
-    margin-top: 10px;
-    height: auto;
-    width: 45%;
-    max-height: 230px;
-    overflow: auto;
-  }
-  
-  .detail-data {
-    width: 100%;
-  }
-  
-  /* toast message stylings */
-  .toast {
-    background-color: black;
-    margin-bottom: 10px;
-    height: 50px;
-    width: 250px;
-    align-items: center;
-    color: white;
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 40%;
-    z-index: 2;
-  }
-  
-  .success {
-    font-size: 50px;
-    background-color: green;
-  }
-  
-  .toast-text {
-    margin-left: 10px;
-    color: green;
-  }
-  
-  .error {
-    font-size: 50px;
-    background-color: red;
-  }
-    

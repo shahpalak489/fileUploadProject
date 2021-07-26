@@ -21,7 +21,7 @@
                     <div>
                         <input type="text" class="inputbox-design text-style" id="company-id" placeholder="company id"/>
                         <input type="text"class="inputbox-design text-style" id="company-name" placeholder="company name"/>
-                        <button class="inputbox-design background-color text-style" id="add_company">
+                        <button class="inputbox-design background-color text-style add-button" id="add_company">
                             <b>Add</b>
                         </button>
                     </div>
@@ -37,23 +37,23 @@
                 <form id="upload-file" method="post" enctype="multipart/form-data">
                     <fieldset>
                         <label for="file"></label>
-                        <input name="file" type="file" class="background-color text-style set-width"/>
+                        <input name="file" type="file" class="text-style"/>
                     </fieldset>
                     <fieldset>
                         <button id="upload-file-btn" class="inputbox-design background-color text-style" type="button" > Submit </button>
                     </fieldset>
                 </form>
-                <div class="upload-text-container set-width">
-                    <span class="upload-content">File format: CSV, TXT</span>
+                <div class="upload-text-container format-style background-color">
+                    <span class="upload-content">Format: CSV, TXT</span>
                     <span class="upload-content">Min rows: 5</span>
                 </div>
             </div>
-            <div class="flexbox-prop main-div">
+            <div class="flexbox-prop main-div" id="detail-data-block" >
                 <p class="text-style div-heading">
                     <b><u> Share price detail: </u></b>
                 </p>
-                <div class="flexbox-prop company-table detail-data">
-                    <table class="table-style detail-data" id="company-detail-data"> </table>
+                <div class="detail-data">
+                    <table class="table-style" id="company-detail-data"> </table>
                 </div>
             </div>
         </div>

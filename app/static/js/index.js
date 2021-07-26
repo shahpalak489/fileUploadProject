@@ -30,6 +30,7 @@ $(document).ready(function() {
             cache: false,
             processData: false,
             success: function(data, status, xhr) {
+                $("#detail-data-block").css("display","flex")
                 toast(data.data, data.success);
                 $.ajax({
                     type: 'GET',
@@ -49,7 +50,7 @@ $(document).ready(function() {
                             html += "<tr>";
                             html += "<td>" + value.cid + "</td>";
                             html += "<td>" + value.cname + "</td>";
-                            html += "<td>" + value.share_price + "</td>";
+                            html += "<td>" + '$' + value.share_price + "</td>";
                             html += "<td>" + value.share_price_dt + "</td>";
                             html += "<td>" + value.comments + "</td>";
                             html += "</tr>";
