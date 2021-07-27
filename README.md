@@ -3,7 +3,7 @@
 <!-- Prerequisites: -->
 python vesrion: 3.7.4
 Framwork: Flask
-SQL: 
+SQL
 
 <!-- Getting started: -->
 To download the code repository for the first time:
