@@ -3,11 +3,9 @@
 
 <b> Prerequisites:</b>
 
-python vesrion: 3.7.4
+python version: 3.7.4
 
-Framwork: Flask
-
-SQL
+Framework: Flask
 
 
 <b>Getting started:</b>
