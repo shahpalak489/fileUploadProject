@@ -1,0 +1,87 @@
+2021-07-26 20:32:21,572 [MainThread  ] [INFO ]   * Restarting with stat
+2021-07-26 20:32:22,905 [MainThread  ] [WARNI]   * Debugger is active!
+2021-07-26 20:32:22,914 [MainThread  ] [INFO ]   * Debugger PIN: 479-376-606
+2021-07-26 20:32:22,922 [Thread-1    ] [INFO ]   * Running on http://127.0.0.1:5005/ (Press CTRL+C to quit)
+2021-07-26 20:32:33,253 [Thread-2    ] [INFO ]  Welcome to File Upload Project.
+2021-07-26 20:32:33,267 [Thread-2    ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:32:33] "[37mGET / HTTP/1.1[0m" 200 -
+2021-07-26 20:32:33,345 [Thread-3    ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:32:33] "[37mGET /static/styles/style.css HTTP/1.1[0m" 200 -
+2021-07-26 20:32:33,533 [Thread-4    ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:32:33] "[37mGET /static/js/index.js HTTP/1.1[0m" 200 -
+2021-07-26 20:32:34,153 [Thread-5    ] [INFO ]  -
+2021-07-26 20:32:34,154 [Thread-5    ] [INFO ]  /company/list/v1...[GET]
+2021-07-26 20:32:34,173 [Thread-5    ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:32:34] "[37mGET /company/list/v1 HTTP/1.1[0m" 200 -
+2021-07-26 20:32:34,176 [Thread-6    ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:32:34] "[37mGET /static/images/favicon.png HTTP/1.1[0m" 200 -
+2021-07-26 20:32:40,991 [Thread-7    ] [INFO ]  -
+2021-07-26 20:32:40,991 [Thread-7    ] [INFO ]  /company/list/v1...[PUT]
+2021-07-26 20:32:40,992 [Thread-7    ] [INFO ]  user reqs: {'c_id': '666', 'c_name': 'huji'}
+2021-07-26 20:32:41,320 [Thread-7    ] [INFO ]  success: yay!! successfully new company inserted.
+2021-07-26 20:32:41,320 [Thread-7    ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:32:41] "[37mPUT /company/list/v1 HTTP/1.1[0m" 200 -
+2021-07-26 20:32:41,630 [Thread-8    ] [INFO ]  -
+2021-07-26 20:32:41,631 [Thread-8    ] [INFO ]  /company/list/v1...[GET]
+2021-07-26 20:32:41,635 [Thread-8    ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:32:41] "[37mGET /company/list/v1 HTTP/1.1[0m" 200 -
+2021-07-26 20:33:04,602 [Thread-9    ] [INFO ]  -
+2021-07-26 20:33:04,602 [Thread-9    ] [INFO ]  /file/uploader...[POST]
+2021-07-26 20:33:04,603 [Thread-9    ] [INFO ]  error: [Errno 2] No such file or directory: 'app/data\\valid_file.csv'
+2021-07-26 20:33:04,617 [Thread-9    ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:33:04] "[37mPOST /file/uploader HTTP/1.1[0m" 200 -
+2021-07-26 20:33:41,882 [MainThread  ] [INFO ]   * Restarting with stat
+2021-07-26 20:33:43,351 [MainThread  ] [WARNI]   * Debugger is active!
+2021-07-26 20:33:43,361 [MainThread  ] [INFO ]   * Debugger PIN: 479-376-606
+2021-07-26 20:33:43,369 [Thread-1    ] [INFO ]   * Running on http://127.0.0.1:5005/ (Press CTRL+C to quit)
+2021-07-26 20:33:44,123 [Thread-2    ] [INFO ]  Welcome to File Upload Project.
+2021-07-26 20:33:44,132 [Thread-2    ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:33:44] "[37mGET / HTTP/1.1[0m" 200 -
+2021-07-26 20:33:44,334 [Thread-3    ] [INFO ]  -
+2021-07-26 20:33:44,334 [Thread-3    ] [INFO ]  /company/list/v1...[GET]
+2021-07-26 20:33:44,346 [Thread-3    ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:33:44] "[37mGET /company/list/v1 HTTP/1.1[0m" 200 -
+2021-07-26 20:33:44,372 [Thread-4    ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:33:44] "[37mGET /static/images/favicon.png HTTP/1.1[0m" 200 -
+2021-07-26 20:33:52,469 [Thread-5    ] [INFO ]  -
+2021-07-26 20:33:52,469 [Thread-5    ] [INFO ]  /company/list/v1...[PUT]
+2021-07-26 20:33:52,470 [Thread-5    ] [INFO ]  user reqs: {'c_id': '67', 'c_name': 'nkljnk'}
+2021-07-26 20:33:52,851 [Thread-5    ] [INFO ]  success: yay!! successfully new company inserted.
+2021-07-26 20:33:52,852 [Thread-5    ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:33:52] "[37mPUT /company/list/v1 HTTP/1.1[0m" 200 -
+2021-07-26 20:33:52,863 [Thread-6    ] [INFO ]  -
+2021-07-26 20:33:52,864 [Thread-6    ] [INFO ]  /company/list/v1...[GET]
+2021-07-26 20:33:52,872 [Thread-6    ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:33:52] "[37mGET /company/list/v1 HTTP/1.1[0m" 200 -
+2021-07-26 20:34:01,175 [Thread-7    ] [INFO ]  -
+2021-07-26 20:34:01,175 [Thread-7    ] [INFO ]  /company/list/v1...[PUT]
+2021-07-26 20:34:01,176 [Thread-7    ] [INFO ]  user reqs: {'c_id': '5', 'c_name': 'tyu'}
+2021-07-26 20:34:01,185 [Thread-7    ] [INFO ]  check 1a: oops!! company list already existed.
+2021-07-26 20:34:01,187 [Thread-7    ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:34:01] "[37mPUT /company/list/v1 HTTP/1.1[0m" 200 -
+2021-07-26 20:34:01,434 [Thread-8    ] [INFO ]  -
+2021-07-26 20:34:01,435 [Thread-8    ] [INFO ]  /company/list/v1...[GET]
+2021-07-26 20:34:01,442 [Thread-8    ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:34:01] "[37mGET /company/list/v1 HTTP/1.1[0m" 200 -
+2021-07-26 20:34:06,612 [Thread-9    ] [INFO ]  -
+2021-07-26 20:34:06,613 [Thread-9    ] [INFO ]  /file/uploader...[POST]
+2021-07-26 20:34:06,614 [Thread-9    ] [INFO ]  Uploaded File location: app/data\valid_file.csv
+2021-07-26 20:34:06,654 [Thread-9    ] [INFO ]  Yay!! all checks passed, ready to insert into databse
+2021-07-26 20:34:06,675 [Thread-9    ] [INFO ]  success: successfully 5 rows uploaded.
+2021-07-26 20:34:06,675 [Thread-9    ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:34:06] "[37mPOST /file/uploader HTTP/1.1[0m" 200 -
+2021-07-26 20:34:06,989 [Thread-10   ] [INFO ]  -
+2021-07-26 20:34:06,990 [Thread-10   ] [INFO ]  /fetch/uploaded/companies/v1...[GET]
+2021-07-26 20:34:06,997 [Thread-10   ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:34:06] "[37mGET /fetch/uploaded/companies/v1 HTTP/1.1[0m" 200 -
+2021-07-26 20:34:12,978 [Thread-11   ] [INFO ]  -
+2021-07-26 20:34:12,978 [Thread-11   ] [INFO ]  /file/uploader...[POST]
+2021-07-26 20:34:12,979 [Thread-11   ] [INFO ]  Uploaded File location: app/data\dup_id.csv
+2021-07-26 20:34:12,999 [Thread-11   ] [INFO ]  check 6: duplicate entry in excel.
+2021-07-26 20:34:13,000 [Thread-11   ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:34:13] "[37mPOST /file/uploader HTTP/1.1[0m" 200 -
+2021-07-26 20:35:17,734 [Thread-12   ] [INFO ]  -
+2021-07-26 20:35:17,734 [Thread-12   ] [INFO ]  /file/uploader...[POST]
+2021-07-26 20:35:17,735 [Thread-12   ] [INFO ]  Uploaded File location: app/data\valid_file_-_Copy.csv
+2021-07-26 20:35:17,760 [Thread-12   ] [INFO ]  Yay!! all checks passed, ready to insert into databse
+2021-07-26 20:35:18,213 [Thread-12   ] [INFO ]  success: successfully 5 rows uploaded.
+2021-07-26 20:35:18,214 [Thread-12   ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:35:18] "[37mPOST /file/uploader HTTP/1.1[0m" 200 -
+2021-07-26 20:35:18,221 [Thread-13   ] [INFO ]  -
+2021-07-26 20:35:18,222 [Thread-13   ] [INFO ]  /fetch/uploaded/companies/v1...[GET]
+2021-07-26 20:35:18,229 [Thread-13   ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:35:18] "[37mGET /fetch/uploaded/companies/v1 HTTP/1.1[0m" 200 -
+2021-07-26 20:35:42,234 [Thread-14   ] [INFO ]  -
+2021-07-26 20:35:42,234 [Thread-14   ] [INFO ]  /file/uploader...[POST]
+2021-07-26 20:35:42,237 [Thread-14   ] [INFO ]  Uploaded File location: app/data\valid_file_-_Copy.csv
+2021-07-26 20:35:42,264 [Thread-14   ] [INFO ]  check 5: company not available in database.
+2021-07-26 20:35:42,265 [Thread-14   ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:35:42] "[37mPOST /file/uploader HTTP/1.1[0m" 200 -
+2021-07-26 20:36:07,966 [Thread-15   ] [INFO ]  -
+2021-07-26 20:36:07,966 [Thread-15   ] [INFO ]  /file/uploader...[POST]
+2021-07-26 20:36:07,967 [Thread-15   ] [INFO ]  Uploaded File location: app/data\valid_file_-_Copy.csv
+2021-07-26 20:36:07,997 [Thread-15   ] [INFO ]  Yay!! all checks passed, ready to insert into databse
+2021-07-26 20:36:08,104 [Thread-15   ] [INFO ]  success: successfully 5 rows uploaded.
+2021-07-26 20:36:08,104 [Thread-15   ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:36:08] "[37mPOST /file/uploader HTTP/1.1[0m" 200 -
+2021-07-26 20:36:08,429 [Thread-16   ] [INFO ]  -
+2021-07-26 20:36:08,430 [Thread-16   ] [INFO ]  /fetch/uploaded/companies/v1...[GET]
+2021-07-26 20:36:08,438 [Thread-16   ] [INFO ]  127.0.0.1 - - [26/Jul/2021 20:36:08] "[37mGET /fetch/uploaded/companies/v1 HTTP/1.1[0m" 200 -

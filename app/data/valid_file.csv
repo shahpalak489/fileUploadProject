@@ -1,0 +1,6 @@
+cid,cname,share_price_dt,share_price,comments
+1,NYSE,6/30/2021,1.02,test
+2,Google,6/30/2021,1.03,test
+3,Apple,6/30/2021,1.04,test
+4,Microsoft,6/30/2021,1.05,test
+5,Comcast,6/30/2021,1.06,test
